@@ -1,0 +1,27 @@
+// app global css in SCSS form
+
+/* Hide scrollbars for all elements while maintaining scroll functionality */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+/* Ensure Quasar components with scrollable content also have hidden scrollbars */
+.q-scrollarea__content,
+.q-virtual-scroll__content,
+.scroll,
+.overflow-auto,
+.q-table__middle {
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}

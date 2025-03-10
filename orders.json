@@ -1,0 +1,31 @@
+{
+  "orders": [
+    {
+      "id": "ORD-001",
+      "userId": "1234567890",
+      "date": "2024-03-15T10:30:00",
+      "restaurant": "Burger King",
+      "items": ["Whopper Meal", "Onion Rings"],
+      "total": 350.00,
+      "status": "Processing"
+    },
+    {
+      "id": "ORD-002",
+      "userId": "1234567890",
+      "date": "2024-03-14T15:45:00",
+      "restaurant": "Jollibee",
+      "items": ["Chickenjoy", "Jolly Spaghetti"],
+      "total": 275.50,
+      "status": "Delivered"
+    },
+    {
+      "id": "ORD-003",
+      "userId": "1234567890",
+      "date": "2024-03-13T12:20:00",
+      "restaurant": "Pizza Hut",
+      "items": ["Supreme Pizza", "Garlic Bread"],
+      "total": 450.75,
+      "status": "Cancelled"
+    }
+  ]
+} 
