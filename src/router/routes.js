@@ -10,6 +10,7 @@ const routes = [
       { path: 'profile', component: () => import('pages/ProfilePage.vue') },
       { path: 'cart', component: () => import('pages/CartPage.vue') },
       { path: 'favorites', component: () => import('pages/FavoritesPage.vue') },
+      { path: 'categories', component: () => import('pages/CategoryPage.vue') },
       { path: 'item/:id', component: () => import('pages/ItemDetailPage.vue') },
       { path: 'stores', component: () => import('pages/StorePage.vue') },
       { path: 'store/:id', component: () => import('pages/StoreDetailPage.vue') },

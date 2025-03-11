@@ -18,7 +18,9 @@
         <q-carousel-slide name="food" class="text-center">
           <div class="splash-content text-center">
             <div class="q-mt-xl">
-              <img src="../assets/food.png" alt="Food" class="splash-illustration" />
+              <img src="../assets/splash1.png" alt="Food" class="splash-illustration" />
+              <div class="q-mt-md text-h6 text-weight-bold">Delicious Food</div>
+              <div class="q-mt-md text-subtitle1 text-black">we help you find best and delicious food</div>
             </div>
           </div>
         </q-carousel-slide>
@@ -27,7 +29,9 @@
         <q-carousel-slide name="delivery" class="text-center">
           <div class="splash-content text-center">
             <div class="q-mt-xl">
-              <img src="../assets/delivery.png" alt="Delivery" class="splash-illustration" />
+              <img src="../assets/splash2.png" alt="Delivery" class="splash-illustration" />
+              <div class="q-mt-md text-h6 text-weight-bold">Fast Delivery</div>
+              <div class="q-mt-md text-subtitle1 text-black">we ensure safe and fast delivery</div>
             </div>
           </div>
         </q-carousel-slide>
@@ -84,8 +88,12 @@ export default {
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  padding: 20px;
+  padding: 0px;
   background-color: white;
+}
+
+.q-panel {
+  padding: 0px;
 }
 
 .splash-content {

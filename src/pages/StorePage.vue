@@ -33,6 +33,19 @@
           </template>
         </q-input>
       </div>
+
+     <!-- Category Filter Chip (only shown when a category is selected) -->
+      <div v-if="selectedCategory" class="q-mt-sm">
+        <q-chip
+          removable
+          color="orange"
+          text-color="white"
+          icon="category"
+          @remove="clearCategoryFilter"
+        >
+          Category: {{ selectedCategory }}
+        </q-chip>
+      </div>
     </div>
 
     <!-- Store Listings -->
@@ -92,6 +105,7 @@ export default defineComponent({
     const $q = useQuasar()
     const search = ref('')
     const isSearching = ref(false)
+    const selectedCategory = ref('')
 
     // Sample store data with categories and cuisines
     const stores = ref([
@@ -137,23 +151,37 @@ export default defineComponent({
       }
     ])
 
-    // Enhanced filter function with multiple criteria
+    // Enhanced filter function with multiple criteria including selected category
     const filteredStores = computed(() => {
-      if (!search.value) return stores.value
-
-      const searchTerm = search.value.toLowerCase()
-      return stores.value.filter(store => {
-        return (
-          store.name.toLowerCase().includes(searchTerm) ||
-          store.category.toLowerCase().includes(searchTerm) ||
-          (store.cuisine && store.cuisine.toLowerCase().includes(searchTerm))
+      let result = stores.value
+      // Filter by selected category if any
+      if (selectedCategory.value) {
+        result = result.filter(store =>
+          store.category.toLowerCase() === selectedCategory.value.toLowerCase()
         )
-      })
+      }
+      // Filter by search term if any
+      if (search.value) {
+        const searchTerm = search.value.toLowerCase()
+        result = result.filter(store => {
+          return (
+            store.name.toLowerCase().includes(searchTerm) ||
+            store.category.toLowerCase().includes(searchTerm) ||
+            (store.cuisine && store.cuisine.toLowerCase().includes(searchTerm))
+          )
+        })
+      }
+      return result
     })
 
     // Clear search
     const clearSearch = () => {
       search.value = ''
+    }
+    // Clear category filter
+    const clearCategoryFilter = () => {
+      selectedCategory.value = ''
+      localStorage.removeItem('selectedCategory')
     }
 
     // Navigate to store detail page
@@ -212,8 +240,21 @@ export default defineComponent({
             isFavorite: favorites.includes(store.id)
           }))
         }
+        // Check for selected category from localStorage
+        const category = localStorage.getItem('selectedCategory')
+        if (category) {
+          selectedCategory.value = category
+          // Show notification about filtered results
+          $q.notify({
+            message: `Showing stores in category: ${category}`,
+            color: 'info',
+            icon: 'category',
+            position: 'top',
+            timeout: 2000
+          })
+        }
       } catch (error) {
-        console.error('Error loading favorites:', error)
+        console.error('Error loading data from localStorage:', error)
       }
     })
 
@@ -221,10 +262,12 @@ export default defineComponent({
       stores,
       search,
       isSearching,
+      selectedCategory,
       filteredStores,
       selectStore,
       toggleFavorite,
-      clearSearch
+      clearSearch,
+      clearCategoryFilter
     }
   }
 })

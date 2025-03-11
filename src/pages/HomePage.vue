@@ -241,7 +241,7 @@ export default defineComponent({
     onMounted(() => {
       // Get path and set active tab
       const path = route.path.substring(1) // Remove the leading slash
-      if (['home', 'favorites', 'cart', 'profile'].includes(path)) {
+      if (['home', 'category', 'favorites', 'cart', 'profile'].includes(path)) {
         tab.value = path
       }
 
