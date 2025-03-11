@@ -23,7 +23,6 @@
         <q-tab name="personal" label="Personal" />
         <q-tab name="orders" label="Orders" />
         <q-tab name="payment" label="Payment" />
-        <q-tab name="address" label="Address" />
         <q-tab name="settings" label="Settings" />
       </q-tabs>
 
@@ -119,54 +118,38 @@
         </q-card>
       </q-tab-panel>
 
-      <!-- Saved Addresses Section -->
-      <q-tab-panel name="address" class="q-pa-none">
-        <div class="row justify-between items-center q-mt-md q-mb-sm">
-          <div class="text-subtitle1 text-weight-medium">Saved Addresses</div>
-          <q-btn flat color="orange" icon="add" label="Add New" @click="showAddAddressDialog = true" />
-        </div>
-        <q-card v-for="address in savedAddresses" :key="address.id" flat bordered class="q-mb-md">
-          <q-card-section>
-            <div class="row items-center">
-              <div class="col-auto">
-                <q-icon name="location_on" size="md" color="orange" />
-              </div>
-              <div class="col q-ml-md">
-                <div class="text-subtitle1">{{ address.name }}</div>
-                <div class="text-body2 text-grey">{{ address.address }}</div>
-              </div>
-              <div class="col-auto">
-                <q-badge v-if="address.isDefault" color="green">Default</q-badge>
-              </div>
-            </div>
-          </q-card-section>
-        </q-card>
-      </q-tab-panel>
-
       <!-- Account Settings Section -->
       <q-tab-panel name="settings" class="q-pa-none">
         <q-list separator class="q-mt-md">
           <q-item v-for="setting in accountSettings" :key="setting.id" clickable v-ripple>
             <q-item-section avatar>
-              <q-icon :name="setting.icon" color="orange" />
+              <q-icon :name="setting.icon || 'settings'" color="orange" />
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ setting.name }}</q-item-label>
             </q-item-section>
             <q-item-section side>
-              <q-toggle v-if="'enabled' in setting" v-model="setting.enabled" color="orange" />
+              <q-toggle
+                v-if="'enabled' in setting"
+                v-model="setting.enabled"
+                color="orange"
+                @update:model-value="updateSettings(setting.id, setting.enabled)"
+              />
               <q-item-label v-else-if="'value' in setting" caption>{{ setting.value }}</q-item-label>
             </q-item-section>
           </q-item>
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="logout" color="red" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label class="text-red">Logout</q-item-label>
-            </q-item-section>
-          </q-item>
         </q-list>
+
+        <!-- Logout button -->
+        <div class="q-pa-md q-mt-md">
+          <q-btn
+            color="negative"
+            class="full-width"
+            label="Logout"
+            @click="logout"
+            :loading="isLoading"
+          />
+        </div>
       </q-tab-panel>
     </div>
 
@@ -210,7 +193,8 @@ export default defineComponent({
       savedAddresses,
       showAddAddressDialog,
       fetchUserProfile,
-      logout
+      logout,
+      updateSettings
     } = useProfilePage()
     const router = useRouter()
     const route = useRoute()
@@ -243,7 +227,8 @@ export default defineComponent({
       showAddAddressDialog,
       isLoading,
       error,
-      logout
+      logout,
+      updateSettings
     }
   }
 })

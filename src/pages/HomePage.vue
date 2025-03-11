@@ -188,7 +188,7 @@ export default defineComponent({
       // Store the selected category in localStorage
       localStorage.setItem('selectedCategory', category.name)
       // Navigate to the stores page
-      router.push('/store')
+      router.push('/stores')
     }
 
     // Navigate to item detail page
