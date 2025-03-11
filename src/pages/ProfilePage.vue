@@ -11,6 +11,8 @@
 
     <!-- Profile Sections -->
     <div class="q-pa-md">
+      <!-- Profile content -->
+    </div>
       <q-tabs
         v-model="activeSection"
         class="text-grey"
@@ -21,8 +23,6 @@
         dense
       >
         <q-tab name="personal" label="Personal" />
-        <q-tab name="orders" label="Orders" />
-        <q-tab name="payment" label="Payment" />
         <q-tab name="settings" label="Settings" />
       </q-tabs>
 
@@ -118,28 +118,6 @@
         </q-card>
       </q-tab-panel>
 
-      <!-- Account Settings Section -->
-      <q-tab-panel name="settings" class="q-pa-none">
-        <q-list separator class="q-mt-md">
-          <q-item v-for="setting in accountSettings" :key="setting.id" clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon :name="setting.icon || 'settings'" color="orange" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ setting.name }}</q-item-label>
-            </q-item-section>
-            <q-item-section side>
-              <q-toggle
-                v-if="'enabled' in setting"
-                v-model="setting.enabled"
-                color="orange"
-                @update:model-value="updateSettings(setting.id, setting.enabled)"
-              />
-              <q-item-label v-else-if="'value' in setting" caption>{{ setting.value }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-
         <!-- Logout button -->
         <div class="q-pa-md q-mt-md">
           <q-btn
@@ -150,8 +128,6 @@
             :loading="isLoading"
           />
         </div>
-      </q-tab-panel>
-    </div>
 
     <!-- Bottom Navigation -->
     <q-footer class="bg-white">
@@ -237,6 +213,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .q-tab-panel {
   padding: 0;
+}
+
+.q-page {
+  padding: 10px;
 }
 
 .q-card {

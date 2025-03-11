@@ -87,7 +87,7 @@
           <q-btn
             round
             flat
-            color="grey"
+            color="orange"
             :icon="isFavorite ? 'favorite' : 'favorite_border'"
             @click="toggleFavorite"
             :class="{ 'text-red': isFavorite }"

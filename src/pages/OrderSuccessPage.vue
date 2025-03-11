@@ -75,6 +75,10 @@ export default defineComponent({
   animation: scale-in 0.3s ease-out;
 }
 
+.q-btn {
+  margin-top: 350px;
+}
+
 @keyframes scale-in {
   0% {
     transform: scale(0);

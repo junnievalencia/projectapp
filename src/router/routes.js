@@ -21,7 +21,7 @@ const routes = [
   },
   {
     path: '/:catchAll(.*)*',
-    component: () => import('pages/ErrorNotFound.vue')
+    component: () => import('pages/HomePage.vue')
   },
   {
     path: '/register',

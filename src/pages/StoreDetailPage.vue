@@ -13,7 +13,7 @@
           <q-btn
             flat
             round
-            :color="store.isFavorite ? 'red' : 'grey'"
+            :color="store.isFavorite ? 'orange' : 'grey'"
             :icon="store.isFavorite ? 'favorite' : 'favorite_border'"
             @click="toggleFavorite"
             size="md"

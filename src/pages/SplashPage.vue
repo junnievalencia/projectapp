@@ -1,6 +1,6 @@
 <template>
   <q-page class="bg-white">
-    <div class="splash-container absolute-center">
+    <div class="splash-container">
       <q-carousel
         v-model="slide"
         animated
@@ -12,7 +12,7 @@
         transition-next="slide-left"
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
-        height="100%"
+        height="80%"
       >
         <!-- First Slide: Delicious Food -->
         <q-carousel-slide name="food" class="text-center">
@@ -29,20 +29,21 @@
             <div class="q-mt-xl">
               <img src="../assets/delivery.png" alt="Delivery" class="splash-illustration" />
             </div>
-
           </div>
         </q-carousel-slide>
       </q-carousel>
 
-      <q-btn
-              push color="orange"
-              class="q-mt-xl full-width get-started-btn"
-              size="lg"
-              label="GET STARTED"
-              @click="navigateToLogin"
-              rounded
-              style="width: 280px; height: 39px; font-size: 16px; font-weight: 600; top: 10px; border-radius: 20px;"
-            />
+      <div class="button-container q-mt-md">
+        <q-btn
+          push
+          color="orange"
+          class="full-width get-started-btn"
+          size="lg"
+          label="GET STARTED"
+          @click="navigateToLogin"
+          rounded
+        />
+      </div>
     </div>
   </q-page>
 </template>
@@ -56,6 +57,7 @@ export default {
     const router = useRouter()
 
     const navigateToLogin = () => {
+      console.log('Navigating to login page')
       router.push('/login')
     }
 
@@ -77,10 +79,13 @@ export default {
   width: 100%;
   max-width: 400px;
   height: 100vh;
-  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
   padding: 20px;
   background-color: white;
-  border-radius: 20px;
 }
 
 .splash-content {
@@ -94,7 +99,20 @@ export default {
   object-fit: contain;
 }
 
+.button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+  margin-top: 20px;
+}
+
 .get-started-btn {
+  width: 280px;
+  height: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
   box-shadow: 0 4px 6px rgba(255, 140, 0, 0.2);
   transition: transform 0.2s;
   &:hover {

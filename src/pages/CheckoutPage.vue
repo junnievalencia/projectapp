@@ -13,7 +13,7 @@
       <div class="text-subtitle1 q-mb-sm">Estimated delivery</div>
       <div class="text-subtitle1 text-weight-bold q-mb-lg">Standard Delivery (5-20mins)</div>
 
-      <q-form @submit="onSubmit" class="q-gutter-md">
+      <q-form @submit="onSubmit" class="q-mb-xl">
         <!-- Name -->
         <q-input
           v-model="formData.name"

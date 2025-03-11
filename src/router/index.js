@@ -48,7 +48,10 @@ export default route(function (/* { store, ssrContext } */) {
 
     // If going to login/register page but already authenticated, redirect to home
     if ((to.path === '/login' || to.path === '/register') && isAuthenticated) {
-      return next('/')
+      // Only redirect if not coming from splash page
+      if (from.path !== '/') {
+        return next('/home')
+      }
     }
 
     // Continue to the requested page
