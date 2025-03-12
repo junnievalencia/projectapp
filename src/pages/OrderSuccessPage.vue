@@ -34,26 +34,14 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineComponent } from 'vue'
+import { useOrderSuccessPage } from './OrderSuccessPage.js'
 
 export default defineComponent({
   name: 'OrderSuccessPage',
 
   setup () {
-    const router = useRouter()
-    const orderId = ref(null)
-
-    onMounted(() => {
-      // Get the latest order from localStorage
-      const orders = JSON.parse(localStorage.getItem('orders') || '[]')
-      if (orders.length > 0) {
-        orderId.value = orders[orders.length - 1].id
-      } else {
-        // If no order found, redirect to home
-        router.push('/home')
-      }
-    })
+    const { orderId } = useOrderSuccessPage()
 
     return {
       orderId

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { authService } from '../services'
 import { useRouter } from 'vue-router'
 
-export default function useProfilePage () {
+export function useProfilePage () {
   const activeSection = ref('personal')
   const isLoading = ref(false)
   const error = ref(null)

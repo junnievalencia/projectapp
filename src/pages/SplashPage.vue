@@ -53,26 +53,18 @@
 </template>
 
 <script>
-import { useRouter } from 'vue-router'
+import { useSplashPage } from './SplashPage.js'
 
 export default {
   name: 'SplashPage',
   setup () {
-    const router = useRouter()
-
-    const navigateToLogin = () => {
-      console.log('Navigating to login page')
-      router.push('/login')
-    }
+    const { navigateToLogin, Platform, slide, autoplay } = useSplashPage()
 
     return {
-      navigateToLogin
-    }
-  },
-  data () {
-    return {
-      slide: 'food',
-      autoplay: true
+      navigateToLogin,
+      Platform,
+      slide,
+      autoplay
     }
   }
 }
@@ -81,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 .splash-container {
   width: 100%;
-  max-width: 400px;
+  max-width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -90,6 +82,27 @@ export default {
   margin: 0 auto;
   padding: 0px;
   background-color: white;
+
+  /* Adjust for mobile devices */
+  @media (max-width: 599px) {
+    height: 100vh;
+    justify-content: space-between;
+    padding-top: 10vh;
+    padding-bottom: 5vh;
+  }
+
+  /* Specific iOS adjustments */
+  :global(.ios-device) & {
+    /* iOS safe areas - adjust for notch */
+    padding-top: env(safe-area-inset-top, 0);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+  }
+
+  /* Specific Android adjustments */
+  :global(.android-device) & {
+    /* Android may need different adjustments */
+    padding-top: 10px;
+  }
 }
 
 .q-panel {
@@ -99,12 +112,26 @@ export default {
 .splash-content {
   width: 100%;
   padding: 20px;
+
+  @media (max-width: 599px) {
+    padding: 10px;
+  }
 }
 
 .splash-illustration {
   width: 250px;
   height: 250px;
   object-fit: contain;
+
+  @media (max-width: 599px) {
+    width: 200px;
+    height: 200px;
+  }
+
+  @media (max-height: 700px) {
+    width: 180px;
+    height: 180px;
+  }
 }
 
 .button-container {
@@ -113,6 +140,16 @@ export default {
   justify-content: center;
   padding: 0 20px;
   margin-top: 20px;
+
+  @media (max-width: 599px) {
+    padding: 0 15px;
+    margin-top: 10px;
+  }
+
+  /* iOS safe area bottom adjustment */
+  :global(.ios-device) & {
+    margin-bottom: env(safe-area-inset-bottom, 0);
+  }
 }
 
 .get-started-btn {
@@ -126,6 +163,11 @@ export default {
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(255, 140, 0, 0.3);
+  }
+
+  @media (max-width: 599px) {
+    width: 100%;
+    max-width: 280px;
   }
 }
 
@@ -141,5 +183,10 @@ export default {
   background-color: rgba(230, 190, 255, 0.2);
   border-radius: 50%;
   padding: 20px;
+}
+
+/* Touch-friendly adjustments */
+.q-carousel-slide {
+  touch-action: pan-y;
 }
 </style>

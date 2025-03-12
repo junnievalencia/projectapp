@@ -24,7 +24,8 @@ module.exports = configure(function (ctx) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-webpack/boot-files
     boot: [
-      'axios'
+      'axios',
+      'mobile-config'
     ],
 
     // https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-css
@@ -188,14 +189,16 @@ module.exports = configure(function (ctx) {
       }
     },
 
+    // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-capacitor-apps/configuring-capacitor
+    capacitor: {
+      hideSplashscreen: false,
+      iosStatusBarPadding: true, // add the dynamic top padding on iOS mobile devices
+      backButtonExit: true // Quasar handles app exit on mobile phone back button
+    },
+
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-cordova-apps/configuring-cordova
     cordova: {
       // noIosLegacyBuildFlag: true, // uncomment only if you know what you are doing
-    },
-
-    // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-capacitor-apps/configuring-capacitor
-    capacitor: {
-      hideSplashscreen: true
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/developing-electron-apps/configuring-electron

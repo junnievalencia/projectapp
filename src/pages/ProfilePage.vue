@@ -84,7 +84,7 @@
 
 <script>
 import { defineComponent, ref, onMounted, watch } from 'vue'
-import useProfilePage from './ProfilePage.js'
+import { useProfilePage } from './ProfilePage.js'
 import { useRouter, useRoute } from 'vue-router'
 
 export default defineComponent({

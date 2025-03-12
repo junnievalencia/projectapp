@@ -64,69 +64,34 @@
 </template>
 
 <script>
-import { useRoute, useRouter } from 'vue-router'
-import { authService } from '../services'
+import { defineComponent } from 'vue'
+import { useLoginPage } from './LoginPage.js'
 
-export default {
+export default defineComponent({
   name: 'LoginPage',
   setup () {
-    const route = useRoute()
-    const router = useRouter()
-
-    // Get redirect path from query parameters
-    const redirectPath = route.query.redirect || '/home'
-
-    return {
+    const {
+      username,
+      password,
+      isPwd,
+      loading,
+      errorMessage,
       redirectPath,
-      router
-    }
-  },
-  data: () => {
+      handleSubmit
+    } = useLoginPage()
+
     return {
-      username: '',
-      password: '',
-      isPwd: true,
-      loading: false,
-      errorMessage: ''
+      username,
+      password,
+      isPwd,
+      loading,
+      errorMessage,
+      redirectPath,
+      handleSubmit
     }
   },
-  methods: {
-    async handleSubmit () {
-      this.loading = true
-      this.errorMessage = ''
-
-      try {
-        // Direct login without OTP
-        const loginResponse = await authService.login({
-          email: this.username,
-          password: this.password
-        })
-
-        if (loginResponse.data.token) {
-          // Token storage is handled in the authService.login method
-          this.$q.notify({
-            type: 'positive',
-            message: 'Login successful!'
-          })
-
-          // Redirect to the intended destination or home
-          this.$router.push(this.redirectPath)
-        } else {
-          throw new Error('Login failed')
-        }
-      } catch (error) {
-        console.error('Authentication error:', error)
-        this.errorMessage = error.response?.data?.message || 'Authentication failed'
-        this.$q.notify({
-          type: 'negative',
-          message: this.errorMessage
-        })
-      } finally {
-        this.loading = false
-      }
-    }
-  }
-}
+  methods: {}
+})
 </script>
 
 <style lang="scss" scoped>
